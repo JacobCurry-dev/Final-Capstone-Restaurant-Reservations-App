@@ -1,145 +1,115 @@
-// // import { today } from "../utils/date-time";
-// // keeping this import above to add a "min" later to 'reservation_date' to further prevent user error
+import React from "react";
+import { useHistory } from "react-router-dom";
 
-// export default function ReservationForm ({ handleSubmit, handleCancel }) {
-//     return (
-//         <>
-//             <form className="card" onSubmit={handleSubmit}>
-//                 <label htmlFor="first_name" className="form-label">
-//                     First Name
-//                 </label>
-//                 <input 
-//                     id="first_name"
-//                     name="first_name"
-//                     type="text"
-//                     className="form-control"
-//                     placeholder=""
-//                     required />
-//                 <label htmlFor="last_name" className="form-label">
-//                     Last Name
-//                 </label>
-//                 <input 
-//                     id="last_name"
-//                     name="last_name"
-//                     type="text"
-//                     className="form-control"
-//                     placeholder=""
-//                     required />
-//                 <label htmlFor="mobile_number" className="form-label">
-//                     Mobile Number
-//                 </label>
-//                 <input 
-//                     id="mobile_number"
-//                     name="mobile_number"
-//                     type="tel"
-//                     className="form-control"
-//                     pattern="[0-9]{10}"
-//                     // pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-//                     placeholder="Use no dashes and include area code, i.e. '1234567890'"
-//                     required />
-//                 <label htmlFor="reservation_date" className="form-label">
-//                     Reservation Date
-//                 </label>
-//                 <input 
-//                     id="reservation_date"
-//                     name="reservation_date"
-//                     type="date"
-//                     className="form-control"
-//                     // min={today()}
-//                     required />
-//                 <label htmlFor="people" className="form-label">
-//                     Group Size
-//                 </label>
-//                 <input 
-//                     id="people"
-//                     name="people"
-//                     type="number"
-//                     className="form-control"
-//                     maxLength={2}
-//                     min={1}
-//                     placeholder=""
-//                     required />
-//                 <button type="submit" className="btn btn-primary mb-2">Submit</button>
-//                 <button className="btn btn-danger" onClick={handleCancel}>Cancel</button>
-//             </form>
-//         </>
-//     );
-// }
+function ReservationForm({
+  reservationData,
+  setReservationData,
+  handleSubmit,
+}) {
+  const history = useHistory();
+  const handleChange = ({ target }) => {
+    setReservationData({
+      ...reservationData,
+      [target.name]: target.value,
+    });
+  };
 
-// import { today } from "../utils/date-time";
-// keeping this import above to add a "min" later to `reservation_date` to further prevent user error
+  return (
+    <form onSubmit={handleSubmit}>
+      <div className="form-group d-flex flex-column justify-content-center">
+        <label htmlFor="first_name">
+          First name:
+          <input
+            id="first_name"
+            type="text"
+            name="first_name"
+            onChange={handleChange}
+            value={reservationData.first_name}
+            required
+            className="form-control"
+          />
+        </label>
+        <br />
+        <label htmlFor="last_name">
+          Last name:
+          <input
+            id="last_name"
+            type="text"
+            name="last_name"
+            onChange={handleChange}
+            value={reservationData.last_name}
+            required
+            className="form-control"
+          />
+        </label>
+        <br />
+        <label htmlFor="mobile_number">
+          Mobile number:
+          <input
+            id="mobile_number"
+            type="text"
+            name="mobile_number"
+            placeholder="XXX-XXX-XXXX"
+            onChange={handleChange}
+            value={reservationData.mobile_number}
+            required
+            className="form-control"
+          />
+        </label>
+        <br />
+        <label htmlFor="reservation_date">
+          Date of reservation:
+          <input
+            id="reservation_date"
+            type="date"
+            name="reservation_date"
+            onChange={handleChange}
+            value={reservationData.reservation_date}
+            required
+            className="form-control"
+          />
+        </label>
+        <br />
+        <label htmlFor="reservation_time">
+          Time of reservation:
+          <input
+            id="reservation_time"
+            type="time"
+            name="reservation_time"
+            onChange={handleChange}
+            value={reservationData.reservation_time}
+            required
+            className="form-control"
+          />
+        </label>
+        <br />
+        <label htmlFor="people">
+          Number of people:
+          <input
+            id="people"
+            type="number"
+            name="people"
+            onChange={handleChange}
+            value={reservationData.people}
+            required
+            className="form-control"
+            min="1"
+          />
+        </label>
+      </div>
+      <br />
+      <button type="submit" className="btn btn-primary">
+        Submit
+      </button>
+      <button
+        type="button"
+        className="btn btn-secondary"
+        onClick={() => history.goBack()}
+      >
+        Cancel
+      </button>
+    </form>
+  );
+}
 
-export default function ReservationForm({handleSubmit, handleCancel }) {
-
-    return (
-      <>
-        <form className="card" onSubmit={handleSubmit}>
-          <label htmlFor="first_name" className="form-label">
-            First Name
-          </label>
-          <input 
-              id="first_name" 
-              name="first_name" 
-              type="text" 
-              className="form-control" 
-              placeholder="" 
-              required />
-          <label htmlFor="last_name" className="form-label">
-            Last Name
-          </label>
-          <input 
-              id="last_name" 
-              name="last_name" 
-              type="text" 
-              className="form-control" 
-              placeholder="" 
-              required />        
-          <label htmlFor="mobile_number" className="form-label">
-            Mobile Number
-          </label>
-          <input 
-              id="mobile_number" 
-              name="mobile_number" 
-              type="tel" 
-              className="form-control"
-              pattern="[0-9]{10}"
-              // pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" 
-              placeholder="Use no dashes and include area code, i.e. '1234567890'" 
-              required />        
-          <label htmlFor="reservation_date" className="form-label">
-            Reservation Date
-          </label>
-          <input 
-              id="reservation_date" 
-              name="reservation_date" 
-              type="date" 
-              className="form-control" 
-              // min={today()}
-              required />        
-          <label htmlFor="reservation_time" className="form-label">
-            Reservation Time
-          </label>
-          <input 
-              id="reservation_time" 
-              name="reservation_time" 
-              type="time" 
-              className="form-control" 
-              required />        
-          <label htmlFor="people" className="form-label">
-            Group Size
-          </label>
-          <input 
-              id="people" 
-              name="people" 
-              type="number" 
-              className="form-control" 
-              maxLength={2} 
-              min={1}
-              placeholder="" 
-              required />        
-          <button type="submit" className="btn btn-primary mb-2">Submit</button>
-          <button className="btn btn-danger" onClick={handleCancel}>Cancel</button>
-        </form>
-      </>
-    );
-  }
+export default ReservationForm;

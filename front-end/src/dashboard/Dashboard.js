@@ -1,169 +1,64 @@
-// import React, { useEffect, useState } from "react";
-// import { listReservations } from "../utils/api";
-// import ErrorAlert from "../layout/ErrorAlert";
-// import { today } from "../utils/date-time";
-// import useQuery from "../utils/useQuery";
-// import { Link, Route, Switch } from "react-router-dom";
-// import PreviousDay from "./PreviousDay";
-// import NextDay from "./NextDay";
-// import ReservationList from "../reservations/ReservationList";
-// import TableList from "../tables/TableList";
+import Reservation from "../reservations/Reservation";
+import Table from "../tables/Table";
+import DateNav from "../reservations/DateNav";
 
-// /**
-//  * Defines the dashboard page.
-//  * @param date
-//  *  the date for which the user wants to view reservations.
-//  * @returns {JSX.Element}
-//  */
-// function Dashboard() {
-//   const query = useQuery();
-
-//   const date = ( query.get('date') ? query.get("date") : today() )
-
-//   const [reservations, setReservations] = useState([]);
-//   const [reservationsError, setReservationsError] = useState(null);
-
-//   useEffect(loadDashboard, [date]);
-
-//   function loadDashboard() {
-//     const abortController = new AbortController();
-//     setReservationsError(null);
-//     listReservations({ date }, abortController.signal)
-//       .then(setReservations)
-//       .catch(setReservationsError);
-//     return () => abortController.abort();
-//   }
-
-//   const handleCancel = (event) => {
-//     event.preventDefault();
-//     let confirmed = window.confirm("Do you want to cancel this reservation? This cannot be undone.")
-//     if (confirmed) {
-//       // TODO throw logic in to axios.put() to change reservation status to 'cancelled'
-//     }
-//   }
-
-//   // TODO verify if Link tag will work on href test, or if need to use anchor tag
-//   // TODO
-
-//   // TODO reformat 'created_at' and 'updated on' data to render more readably; take out the 'T', 'Z', and seconds values
-
-
-  
-// // buttons below (next, previous) should take you to a new URLs; do NOT change the current URL
-
-//   return (
-//     <main>
-//       <h1>Dashboard</h1>
-//       <u1 className="nav nav-tabs">
-//         <li className="nav-item">
-//           <Link to={''} className="nav-link">Reservations</Link>
-//         </li>
-//         <li className="nav-item">
-//           <Link to={'/dashboard/tables'} className="nav-link">Tables</Link>
-//         </li>
-//       </u1>
-//       <div className="d-md-flex mb-3">
-//         <h4 className="mb-0">Reservations for {date === today() ? "Today" : date }</h4>
-//       </div>
-//       <Switch>
-//         <Route exact path={'/dashboard'}>
-//           <ReservationList reservations={reservations} handleCancel={handleCancel} />
-//         </Route>
-//         <Route exact path={'/dashboard/tables'}>
-//           <TableList />
-//         </Route>
-//       </Switch>
-//       <ErrorAlert error={reservationsError} />
-//       <PreviousDay />
-//       <NextDay />
-//     </main>
-//   );
-// }
-
-// export default Dashboard;
-
-import React, { useEffect, useState } from "react";
-import { listReservations } from "../utils/api";
-import ErrorAlert from "../layout/ErrorAlert";
-import { today } from "../utils/date-time";
-import useQuery from "../utils/useQuery"
-import { Link, Route, Switch } from "react-router-dom";
-import PreviousDay from "./PreviousDay";
-import NextDay from "./NextDay";
-import ReservationList from "../reservations/ReservationList";
-import TableList from "../tables/TableList";
-
-/**
- * Defines the dashboard page.
- * @param date
- *  the date for which the user wants to view reservations.
- * @returns {JSX.Element}
- */
-function Dashboard() {
-  const query = useQuery();
-
-  const date = ( query.get('date') ? query.get("date") : today() )
-
-  const [reservations, setReservations] = useState([]);
-  const [reservationsError, setReservationsError] = useState(null);
-
-  useEffect(loadDashboard, [date]);
-
-  function loadDashboard() {
-    const abortController = new AbortController();
-    setReservationsError(null);
-    listReservations({ date }, abortController.signal)
-      .then(setReservations)
-      .catch(setReservationsError);
-    return () => abortController.abort();
-  }
-
-  //TODO build handleCancel including a window.confirm() prompt
-  const handleCancel = (event) => {
-    event.preventDefault();
-    let confirmed = window.confirm("Do you want to cancel this reservation? This cannot be undone")
-    if (confirmed) {
-      //TODO throw logic in to axios.put() to change reservation status to "cancelled"
-    } 
-  }
-
-
-  //TODO verify if Link tag will work on href test, or if need to use 'a' tag
-  //TODO 
-
-  //TODO reformat "created_at" and "updated on" data to render more readably; take out the `T`, `Z`, and seconds values
-
-
-
-  //* buttons below (next, previous) should take you to new URLs; do NOT change the current URL
+const Dashboard = ({ date, reservations, tables, setTables, setReservations }) => {
   return (
-    <main>
-      <h1>Dashboard</h1>
-      <ul className="nav nav-tabs">
-          <li className="nav-item">
-            <Link to={``} className="nav-link">Reservations</Link>
-          </li>
-          <li className="nav-item">
-            <Link to={`/dashboard/tables`} className="nav-link">Tables</Link>
-          </li>
-        </ul>
-      <div className="d-md-flex mb-3">
-        <h4 className="mb-0">Reservations for {date === today() ? "Today" : date}</h4>
-      </div>
-      <Switch>
-        <Route exact path={`/dashboard`}>
-          <ReservationList reservations={reservations} handleCancel={handleCancel}/>
-        </Route>
-        <Route exact path={`/dashboard/tables`}>
-          <TableList />
-        </Route>
-      </Switch>
-      <ErrorAlert error={reservationsError} />
-      <PreviousDay />
-      <NextDay />
+    <>
+      <h1 className="text-center">Dashboard</h1>
+      <section>
+        <div className="text-center mb-3">
+          <h4 className="mb-0">Reservations for {date}</h4>
+        </div>
 
-    </main>
-  );
+        {reservations.length > 0 ? (
+          <div className="row row-cols-1 row-cols-md-4">
+          {reservations.map((reservation) => (
+            <Reservation 
+              key={reservation.reservation_id}
+              reservation={reservation}
+              reservations={reservations}
+              setReservations={setReservations}
+              />
+          ))}{" "}
+          </div>
+        ) : (
+          <div className="container-fluid text-center">
+            <h2>No reservations for this date.</h2>
+          </div>
+        )}
+      </section>
+      <nav className="text-center">
+          <DateNav date={date} />
+      </nav>
+      <section>
+          <div className="d-md-flex mb-3">
+            <h4 className="mb-0">All Tables</h4>
+          </div>
+
+          <table className="table table-color">
+            <thead>
+              <tr>
+                <th scope="col">Table Name</th>
+                <th scope="col">Capacity</th>
+                <th scope="col">Status</th>
+                <th scope="col">Finish</th>
+              </tr>
+            </thead>
+            <tbody>
+              {tables.map((table) => (
+                <Table 
+                  key={table.table_id}
+                  table={table}
+                  tables={tables}
+                  setTables={setTables}
+                  />
+              ))}
+            </tbody>
+          </table>
+      </section>
+    </>
+  )
 }
 
 export default Dashboard;
