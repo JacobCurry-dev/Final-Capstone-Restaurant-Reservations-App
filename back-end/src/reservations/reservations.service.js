@@ -89,6 +89,52 @@ function edit(reservation_id, reservation) {
 }
 
 /** lists all reservations with the given date or mobile number */
+// function list(date, mobile_number) {
+//     if(date) {
+//         return knex(tableName)
+//         .select("*")
+//         .where({ reservation_date: date })
+//         .orderBy("reservation_time", "asc");
+//     }
+
+//     if(mobile_number) {
+//         return knex(tableName) 
+//         .select("*")
+//         .where("mobile_number", "like", `${mobile_number}%`);
+//     }
+//     return knex(tableName)
+//     .select("*")
+//     .whereNot({ status: "cancelled" });
+
+// }
+
+
+
+// function list () {
+//     return knex("reservations")
+//         .select("*")
+//         .orderBy("reservations.reservation_time")
+//         // .whereNot({ "reservations.status": "cancelled" });
+// }
+
+// function listDate (date) {
+//     return knex("reservations")
+//         .select("*")
+//         .where({ "reservations.reservation_date": date })
+//         .whereNot({ "reservations.status": "cancelled" })
+//         .whereNot({ "reservations.status": "finished" })
+//         .orderBy("reservations.reservation_time");
+// }
+
+// function listMobile (mobile) {
+//     return knex("reservations")
+//         .whereRaw(
+//             "translate(mobile_number, '() -', '') like ?",
+//             `%${mobile.replace(/\D/g, "")}%` 
+//         )
+//         .orderBy("reservation_date");
+// }
+
 function list(date, mobile_number) {
     if(date) {
         return knex(tableName)
@@ -102,9 +148,6 @@ function list(date, mobile_number) {
         .select("*")
         .where("mobile_number", "like", `${mobile_number}%`);
     }
-    return knex(tableName)
-    .select("*");
-
 }
 
 module.exports = {

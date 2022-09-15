@@ -276,6 +276,38 @@ next();
 /** List HANDLERS for reservation resources */
 
 /** lists reservations for a given date with or without a given phone number */
+// async function list(req, res) {
+//   const date = req.query.date;
+//   const mobile = req.query.mobile_number;
+//   if (date) {
+//     console.log(date);
+//     const reservations = await service.listDate(date);
+//     // const data = reservations.filter(reservation => reservation.status !== "finished")
+//     console.log("new console 1", reservations);
+//     return res.json({
+//       // data,
+//       reservations,
+//     });
+//   }
+//   if (mobile) {
+//     const reservations = await service.listMobile(mobile);
+//     // const data = reservations.filter(reservation => reservation.status !== "finished")
+//     console.log("new console 2", reservations);
+//     return res.json({
+//       // data,
+//       reservations,
+//     });
+//   } else {
+//     const reservations = await service.list();
+//     // const data = reservations.filter(reservation => reservation.status !== "finished");
+//     console.log("new console 3", reservations);
+//     return res.json({
+//       // data,
+//       reservations,
+//     });
+//   }
+// }
+
 async function list(request, response) {
   const date = request.query.date;
   const mobile_number = request.query.mobile_number;

@@ -30,8 +30,8 @@ export default function ReservationsComponent({reservations, loadDashboard}){
             <button>Edit</button>
             </a>
 
-            <button data-reservation-id-cancel={reservation.reservation_id} 
-            onClick={(e)=>onCancel(e,reservation)}>Cancel</button>
+            { reservation.status !== "cancelled" && <button data-reservation-id-cancel={reservation.reservation_id} 
+            onClick={(e)=>onCancel(e,reservation)}>Cancel</button> }
           </div>
       )
   })
