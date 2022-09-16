@@ -1,11 +1,17 @@
-import { Link } from "react-router-dom";
+import Credits from "./Credits";
 
 export default function Footer () {
     return (
-        <div>
-            <Link className="nav-link" to="/credits">
+        <div style={{
+            background: '#393a44'
+        }}>
+            <div className="mt-2">
+            <div style={{ color: 'white' }}>
                 Credits
-            </Link>
+            </div>
+            <br />
+            <Credits />
+        </div>
         </div>
     );
 }

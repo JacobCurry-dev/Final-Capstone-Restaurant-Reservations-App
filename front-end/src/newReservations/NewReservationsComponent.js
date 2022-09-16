@@ -35,6 +35,8 @@ createRes(reservation)
 }
 
     return (
+    <>
+    <h2 className="text-center">Your Reservation</h2>
     <form onSubmit={submitHandler}>
         <div className="card">
             <div className="card-body text-center">
@@ -93,5 +95,6 @@ createRes(reservation)
         </div>
         </div>
     </form>    
+    </>
     )
 }

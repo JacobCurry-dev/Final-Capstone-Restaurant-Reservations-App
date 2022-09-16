@@ -48,7 +48,7 @@ function Dashboard() {
 
   return (
 <>
-<div className="container-fluid">
+<div className="container-fluid mt-3">
         <div className="row h-100">
           <div className="col">
             <div
@@ -129,9 +129,9 @@ function Dashboard() {
         )}
         </div>
         <hr style={{
-          background: 'navy',
-          color: 'navy',
-          borderColor: 'navy',
+          background: '#474448',
+          color: '#474448',
+          borderColor: '#474448',
           height: '2px',
         }}
         />
