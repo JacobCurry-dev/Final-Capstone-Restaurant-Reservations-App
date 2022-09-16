@@ -52,7 +52,7 @@ let reservation_id = params.reservation_id;
 
     return (
         <form onSubmit={submitHandler}>
-            <select required name="table_id" onChange={onChange}>
+            <select key={tableId} required name="table_id" onChange={onChange}>
                 {tablesForm}
             </select>
             <button type="submit">Submit</button>

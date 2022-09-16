@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 import {  listReservations } from "../utils/api";
 import ReservationsComponent from "../dashboard/ReservationsComponent";
 
 export default function SearchComponent(){  
+  const history = useHistory();
   const [formData, setFormData] = useState({})
   const [reservations, setReservations] = useState([])
   const [searched, setSearched] = useState(false)
@@ -28,12 +30,20 @@ export default function SearchComponent(){
     <form
     onSubmit={submitHandler}
     >
-      <label>Mobile Number</label> 
+      <div className="card">
+        <div className="card-body text-center">
+      <div className="card-title">Mobile Number</div> 
       <input onChange={handleChange} 
       type="search" 
       name="mobile_number" 
-      placeholder="Enter a customer's phone number" 
-      required></input> <button type="submit">Find</button>
+      placeholder="Mobile Number" 
+      required></input> 
+      <button type="submit" className="btn btn-success ml-3">Find</button>
+      <button className="btn btn-danger ml-3" type="button"
+        onClick={() => history.push("/")}
+        >Cancel</button>
+      </div>
+      </div>
     </form>
     <div>
     {reservations.length !== 0 ? <ReservationsComponent reservations={reservations}/> : null}  

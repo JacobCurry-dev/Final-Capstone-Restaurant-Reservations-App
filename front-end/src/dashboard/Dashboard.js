@@ -1,68 +1,3 @@
-// import Reservation from "../reservations/Reservation";
-// import Table from "../tables/Table";
-// import DateNav from "../reservations/DateNav";
-
-// const Dashboard = ({ date, reservations, tables, setTables, setReservations }) => {
-//   return (
-//     <>
-//       <h1 className="text-center">Dashboard</h1>
-//       <section>
-//         <div className="text-center mb-3">
-//           <h4 className="mb-0">Reservations for {date}</h4>
-//         </div>
-
-//         {reservations.length > 0 ? (
-//           <div className="row row-cols-1 row-cols-md-4">
-//           {reservations.map((reservation) => (
-//             <Reservation 
-//               key={reservation.reservation_id}
-//               reservation={reservation}
-//               reservations={reservations}
-//               setReservations={setReservations}
-//               />
-//           ))}{" "}
-//           </div>
-//         ) : (
-//           <div className="container-fluid text-center">
-//             <h2>No reservations for this date.</h2>
-//           </div>
-//         )}
-//       </section>
-//       <nav className="text-center">
-//           <DateNav date={date} />
-//       </nav>
-//       <section>
-//           <div className="d-md-flex mb-3">
-//             <h4 className="mb-0">All Tables</h4>
-//           </div>
-
-//           <table className="table table-color">
-//             <thead>
-//               <tr>
-//                 <th scope="col">Table Name</th>
-//                 <th scope="col">Capacity</th>
-//                 <th scope="col">Status</th>
-//                 <th scope="col">Finish</th>
-//               </tr>
-//             </thead>
-//             <tbody>
-//               {tables.map((table) => (
-//                 <Table 
-//                   key={table.table_id}
-//                   table={table}
-//                   tables={tables}
-//                   setTables={setTables}
-//                   />
-//               ))}
-//             </tbody>
-//           </table>
-//       </section>
-//     </>
-//   )
-// }
-
-// export default Dashboard;
-
 import React, { useEffect, useState } from "react";
 import { listReservations, listTables } from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert";
@@ -71,6 +6,7 @@ import ListTables from "./ListTables";
 import useQuery from "../utils/useQuery";
 import { today, next, previous } from "../utils/date-time";
 import { useHistory } from "react-router-dom"
+import moment from "moment";
 
 /**
  * Defines the dashboard page.
@@ -78,6 +14,7 @@ import { useHistory } from "react-router-dom"
  *  the date for which the user wants to view reservations.
  * @returns {JSX.Element}
  */
+
 function Dashboard() {
   const [reservations, setReservations] = useState([]);
   const [reservationsError, setReservationsError] = useState(null);
@@ -107,9 +44,14 @@ function Dashboard() {
 
   return (
     <main>
-      <h1>Dashboard</h1>
+      <h1 className="text-center">Dashboard</h1>
       <div className="d-md-flex mb-3">
-        <h4 className="mb-0">Reservations for date</h4>
+        <h4 className="mb-0 text-center">Reservations for {moment(date).format("ddd MMMM Do, YYYY")}</h4>
+      </div>
+      <div className="center">
+      <button className="btn btn-secondary mr-3 mb-3" onClick={() => history.push(`/dashboard?date=${previous(date)}`)}>Previous</button>
+      <button className="btn btn-primary mb-3" onClick={() => history.push(`/dashboard?date=${today()}`)}>Today</button>
+      <button className="btn btn-secondary ml-3 mb-3" onClick={() => history.push(`/dashboard?date=${next(date)}`)}>Next</button>
       </div>
       <div>
       {reservations.length !== 0 ? (
@@ -119,9 +61,6 @@ function Dashboard() {
           `There are no reservations today`
         )}
         </div>
-      <button onClick={() => history.push(`/dashboard?date=${previous(date)}`)}>Previous</button>
-      <button onClick={() => history.push(`/dashboard?date=${today()}`)}>Today</button>
-      <button onClick={() => history.push(`/dashboard?date=${next(date)}`)}>Next</button>
       <ListTables tables={tables} loadTables={loadTables} loadDashboard={loadDashboard}/>
       <ErrorAlert error={reservationsError} />
     </main>
