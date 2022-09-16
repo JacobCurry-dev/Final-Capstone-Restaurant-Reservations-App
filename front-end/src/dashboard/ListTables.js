@@ -14,7 +14,7 @@ export default function ListTables({ tables, loadTables, loadDashboard }) {
 
   const list = tables.map((table) => {
     return (
-      <div className="card" key={table.table_id}>
+      <div className="card mb-3" key={table.table_id}>
         <div className="card-body">
           <p className="card-text">Table Name: {table.table_name}</p>
           <p>Table Id: {table.table_id}</p>
@@ -26,6 +26,7 @@ export default function ListTables({ tables, loadTables, loadDashboard }) {
           </p>
           {table.reservation_id ? (
             <button
+              className="btn btn-primary mb-3"
               value={table.table_id}
               data-table-id-finish={table.table_id}
               onClick={clickHandler}

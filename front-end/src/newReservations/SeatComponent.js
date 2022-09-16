@@ -22,16 +22,6 @@ let reservation_id = params.reservation_id;
       return () => abortController.abort();
     }
 
-    const tablesForm = tables.map((table, index) => {
-        return (
-            <>
-            <option key={index} value={table.table_id}>
-            {table.table_name} - {table.capacity}
-            </option>
-            </>
-        )
-    })
-
     const onChange = (event) => {
         const { target } = event;
         const value = target.value;
@@ -51,14 +41,23 @@ let reservation_id = params.reservation_id;
 
 
     return (
+        <div className="card text-center">
+            <div className="card-body">
         <form onSubmit={submitHandler}>
-            <select key={tableId} required name="table_id" onChange={onChange}>
-                {tablesForm}
+            <select id="table_id" value={tableId} required name="table_id" onChange={onChange}>
+                <option>--- Select a Table ---</option>
+                {tables.map((table) => (
+                    <option value={table.table_id} key={table.table_id}>
+                        {`${table.table_name} - ${table.capacity}`}
+                    </option>
+                ))}
             </select>
-            <button type="submit">Submit</button>
-            <button type="button" onClick={() => history.go(-1)}
+            <button className="btn btn-success ml-3" type="submit">Submit</button>
+            <button className="btn btn-danger ml-3" type="button" onClick={() => history.go(-1)}
             >Cancel</button>
             <ErrorAlert error={tablesError} />
         </form>
+        </div>
+        </div>
     )
 }

@@ -45,7 +45,9 @@ export default function NewTable(){
 
     return (
         <form onSubmit={submitHandler}>
-            <div>
+            <div className="card">
+                <div className="card-body text-center">
+            <div className="mb-1">
             <input 
             name="table_name"
             type="string"
@@ -54,7 +56,7 @@ export default function NewTable(){
             onChange={onChange}
             />
             </div>
-            <div>
+            <div className="mb-1">
             <input 
             name="capacity"
             type="number"
@@ -63,10 +65,12 @@ export default function NewTable(){
             onChange={onChange}
             />
             </div>  
-            <button type="submit">Submit</button>          
-            <button type="button" onClick={() => history.go(-1)}
+            <button className="btn btn-success mr-3" type="submit">Submit</button>          
+            <button className="btn btn-danger" type="button" onClick={() => history.push("/")}
             >Cancel</button>     
             <ErrorAlert error={errors}/>     
+            </div>
+            </div>
         </form> 
 )
 }

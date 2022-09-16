@@ -13,7 +13,7 @@ export default function ReservationsComponent({reservations, loadDashboard}){
 
   let reservationsList = reservations.map((reservation) => {
       return (
-          <div className="card" key={reservation.reservation_date}>
+          <div className="card mb-3" key={reservation.reservation_date}>
             <div className="card-body">
              <p className="card-text">Name: {reservation.first_name} {reservation.last_name}</p>
              <p className="card-text">Mobile number: {reservation.mobile_number}</p>

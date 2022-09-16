@@ -8,6 +8,10 @@ import { today, next, previous } from "../utils/date-time";
 import { useHistory } from "react-router-dom"
 import moment from "moment";
 
+import WomanWithPlate from "../images/WomanWithPlate.jpg";
+import FrenchRestaurant from "../images/FrenchRestaurant.jpg";
+import CafeBarMenu from "../images/CafeBarMenu.jpg";
+
 /**
  * Defines the dashboard page.
  * @param date
@@ -43,13 +47,76 @@ function Dashboard() {
   }
 
   return (
-    <main>
+<>
+<div className="container-fluid">
+        <div className="row h-100">
+          <div className="col">
+            <div
+              id="carouselExampleIndicators"
+              className="carousel slide mb-4"
+              data-ride="carousel"
+            >
+              <ol className="carousel-indicators">
+                <li
+                  data-target="#carouselExampleIndicators"
+                  data-slide-to="0"
+                  className="active"
+                ></li>
+                <li
+                  data-target="#carouselExampleIndicators"
+                  data-slide-to="1"
+                ></li>
+                <li
+                  data-target="#carouselExampleIndicators"
+                  data-slide-to="2"
+                ></li>
+              </ol>
+              <div className="carousel-inner">
+                <div className="carousel-item active">
+                  <img src={WomanWithPlate} className="d-block w-100" alt="..." />
+                </div>
+                <div className="carousel-item">
+                  <img src={FrenchRestaurant} className="d-block w-100" alt="..." />
+                </div>
+                <div className="carousel-item">
+                  <img src={CafeBarMenu} className="d-block w-100" alt="..." />
+                </div>
+              </div>
+              <button
+                className="carousel-control-prev"
+                type="button"
+                data-target="#carouselExampleIndicators"
+                data-slide="prev"
+              >
+                <span
+                  className="carousel-control-prev-icon"
+                  aria-hidden="true"
+                ></span>
+                <span className="sr-only">Previous</span>
+              </button>
+              <button
+                className="carousel-control-next"
+                type="button"
+                data-target="#carouselExampleIndicators"
+                data-slide="next"
+              >
+                <span
+                  className="carousel-control-next-icon"
+                  aria-hidden="true"
+                ></span>
+                <span className="sr-only">Next</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    <main className="text-center">
       <h1 className="text-center">Dashboard</h1>
-      <div className="d-md-flex mb-3">
-        <h4 className="mb-0 text-center">Reservations for {moment(date).format("ddd MMMM Do, YYYY")}</h4>
+      <div className="text-center mb-3">
+        <h4 className="mb-0">Reservations for {moment(date).format("ddd MMMM Do, YYYY")}</h4>
       </div>
       <div className="center">
-      <button className="btn btn-secondary mr-3 mb-3" onClick={() => history.push(`/dashboard?date=${previous(date)}`)}>Previous</button>
+      <button className="btn btn-secondary mr-3 mb-3" onClick={() => history.push(`/dashboard?date=${previous(date)}`)}>Prev.</button>
       <button className="btn btn-primary mb-3" onClick={() => history.push(`/dashboard?date=${today()}`)}>Today</button>
       <button className="btn btn-secondary ml-3 mb-3" onClick={() => history.push(`/dashboard?date=${next(date)}`)}>Next</button>
       </div>
@@ -61,9 +128,17 @@ function Dashboard() {
           `There are no reservations today`
         )}
         </div>
+        <hr style={{
+          background: 'navy',
+          color: 'navy',
+          borderColor: 'navy',
+          height: '2px',
+        }}
+        />
       <ListTables tables={tables} loadTables={loadTables} loadDashboard={loadDashboard}/>
       <ErrorAlert error={reservationsError} />
     </main>
+    </>
   );
 }
 
