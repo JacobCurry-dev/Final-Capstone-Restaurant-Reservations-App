@@ -3,6 +3,7 @@
 > You have been hired as a full stack developer at _Periodic Tables_, a startup that is creating a reservation system for fine dining restaurants.
 > The software is used only by restaurant personnel when a customer calls to request a reservation.
 > At this point, the customers will not access the system online.
+![Capture](https://user-images.githubusercontent.com/101269170/191304355-7e8a92c9-696c-457e-ac63-49e61a5affbc.PNG)
 
 Existing files
 This repository is set up as a monorepo, meaning that the frontend and backend projects are in one repository. This allows you to open both projects in the same editor.
