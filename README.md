@@ -29,16 +29,17 @@ Search for a reservation by phone number
 Change an existing reservation
 ---
 ## Technologies/Tools used:
-JavaScript
-React.js
-HTML
-CSS/Bootstrap
-JSX
-RESTful API
-Express
-NodeJS
-Knex
-PostgreSQL
+
+1. JavaScript
+2. React.js
+3. HTML
+4. CSS/Bootstrap
+5. JSX
+6. RESTful API
+7. Express
+8. NodeJS
+9. Knex
+10. PostgreSQL
 ---
 ## Installation
 1. Fork and clone this repository.
