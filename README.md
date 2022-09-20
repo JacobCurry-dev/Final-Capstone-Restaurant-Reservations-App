@@ -5,28 +5,29 @@
 > At this point, the customers will not access the system online.
 ![Capture](https://user-images.githubusercontent.com/101269170/191304355-7e8a92c9-696c-457e-ac63-49e61a5affbc.PNG)
 ---
-## Existing files
+## Existing files:
+
 This repository is set up as a monorepo, meaning that the frontend and backend projects are in one repository. This allows you to open both projects in the same editor.
 
 The table below describes the folders in this starter repository:
 
-## Folder/file path	Description
-./back-end	The backend project, which runs on localhost:5001 by default.
-./front-end	The frontend project, which runs on localhost:3000 by default.
-Note: Please do not submit a pull request to this repository with your solution.
----
-API
-API Documentation: API
+## Folder/file path	Description:
+
+1. ./back-end	The backend project, which runs on localhost:5001 by default.
+2. ./front-end	The frontend project, which runs on localhost:3000 by default.
+
+*Note: Please do not submit a pull request to this repository with your solution.*
 ---
 ## User storied include:
-Create and list reservations
-Create reservation on a future, working date
-Create reservation within eligible timeframe
-Seat reservation
-Finish an occupied table
-Reservation Status
-Search for a reservation by phone number
-Change an existing reservation
+
+1. Create and list reservations
+2. Create reservation on a future, working date
+3. Create reservation within eligible timeframe
+4. Seat reservation
+5. Finish an occupied table
+6. Reservation Status
+7. Search for a reservation by phone number
+8. Change an existing reservation
 ---
 ## Technologies/Tools used:
 
