@@ -20,7 +20,7 @@ The table below describes the folders in this starter repository:
 
 *Note: Please do not submit a pull request to this repository with your solution.*
 ---
-## User storied include:
+## User stories include:
 
 1. Create and list reservations
 2. Create reservation on a future, working date
